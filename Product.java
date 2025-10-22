@@ -1,16 +1,16 @@
 public class Product {
-    private String id;
+    private int id;
     private String name;
     private int quantity;
     private int threshold;
 
-    public Product(String id , String name , int quantity , int threshold){
+    public Product(int id , String name , int quantity , int threshold){
         this.id = id;
         this.name = name;
         this.quantity = quantity;
         this.threshold = threshold;
     }
-    public String getID() { return id ;
+    public int getID() { return id ;
     }
     public String getName(){ return name ; 
     }
@@ -18,20 +18,18 @@ public class Product {
     }
     public int getThreshold() { return threshold ;
     }
-    public void increaseQuantity(int qty){
-        if( qty <= 0 ) return;
-        this.quantity += qty;
+    public void increaseStock(int amount){
+        quantity += amount;
     }
-    public boolean decreaseQuantity(int qty) {
-        if ( qty <= 0) return false;
-        if ( qty > this.quantity) {
-            return false; 
-            //insufficient stock
+    public boolean decreaseStock(int amount) {
+        if (amount > quantity){
+            System.out.println( " Not enough stock for " + name);
+           return false;
         }
-        this.quantity -= qty ;
+        quantity -= amount;
         return true;
-    }
-    public boolean isLowStock() {
-        return this.quantity < this.threshold;
-    }
+      }
+      public String toString() {
+        return id + " | " + name + " | Qty: " + quantity + " | Threshold: " + threshold; 
+      }
 }
